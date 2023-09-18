@@ -25,7 +25,13 @@ io.on("connection", (socket) => {
         console.log(onlineUsers)
         console.log("user" ,user)
         if (user) {
-            io.to(user.socketId).emit("getMessages", message)
+            io.to(user.socketId).emit("getMessages", message);
+            io.to(user.socketId).emit("getNotification", {
+                senderId:message.senderId,
+                isRead:false,
+                date : new Date()
+            });
+
         }
     })
 
